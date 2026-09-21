@@ -161,6 +161,15 @@
     padding: 12px;
   }
 
+  .split-photo img.ph {
+    display: block;
+    object-fit: cover;
+    padding: 0;
+  }
+
+  .split-photo.gallery { display: flex; flex-direction: column; gap: 12px; }
+  .split-photo.gallery img { width: 100%; height: 190px; object-fit: cover; display: block; }
+
   /* 해시태그 (백엔드) */
   .hashtags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
 
@@ -289,13 +298,15 @@
     <div class="split-section">
       <div>
         <p class="prose reveal">저는 금융감독원에서 근무하고 있습니다. 올해는 건전성 평가 업무를 담당하고 있는데, 건전성 평가는 금융회사들의 경영 건전성을 평가하고 필요시 조치를 요구하는 일입니다.
-          <a class="tap-link" href="#" id="policy-link" target="_blank" title="관련 기사 링크">👆</a>
+          <a class="tap-link" href="https://www.mt.co.kr/finance/2026/07/31/2026073117124141500" id="policy-link" target="_blank" title="관련 기사 링크">📰</a>
         </p>
         <p class="prose reveal">올해부터는 DFMBA과정을 시작해서 8기 동기분들과 여의도에서 수업을 듣고 있습니다. 인공지능 트랙과정을 위주로 수강중입니다.</p>
         <p class="prose reveal">현재 관심있는 분야는 블록체인 기반의 계좌, 계정 추적입니다. 아직 혼자 자료를 수집하는 정도의 수준이지만 관심있으신 분들은 함께 얘기 나눠봐도 좋을 것 같습니다.</p>
       </div>
-      <div class="split-photo reveal">
-        <div class="ph">사진 자리 · 나의 프론트엔드</div>
+      <div class="split-photo gallery reveal">
+        <img src="images/photo-frontend-1.jpg" alt="여의도 금융가 빌딩">
+        <img src="images/photo-frontend-2.jpg" alt="사무실 책상 위 노트와 커피">
+        <img src="images/photo-frontend-3.jpg" alt="차트 자료를 보는 손">
       </div>
     </div>
   </section>
@@ -304,7 +315,7 @@
     <h2 class="big-label align-right reveal">나의 백엔드</h2>
     <div class="split-section mirror">
       <div class="split-photo reveal">
-        <div class="ph">사진 자리 · 나의 백엔드</div>
+        <img class="ph" src="images/photo-backend-1.jpg" alt="이불 속에서 리모컨을 든 손">
       </div>
       <div>
         <p class="prose reveal">평소의 저는 TV를 보거나 Youtube를 보면서 집에서 쉬는걸 선호합니다. 요즘 좋아하는 컨텐츠는 리센느, 침착맨, 실리카겔, F1 그리고 영화 드라마는 장르를 가리지 않습니다.</p>
@@ -414,7 +425,6 @@
   // TODO: 실제 GitHub / Swagger / 정책 링크로 교체
   document.querySelectorAll('#github-link-nav, #github-link-card').forEach(a => a.href = 'https://github.com/ellaamode/my-intro');
   document.getElementById('swagger-link-card').href = 'https://my-intro-6i2d.onrender.com/docs';
-  document.getElementById('policy-link').href = '#';
 </script>
 
 </body>
