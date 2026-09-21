@@ -38,14 +38,19 @@ def map_weather_code(code):
 
 @app.get("/weather")
 def get_weather():
-    res = requests.get(
-        "https://api.open-meteo.com/v1/forecast",
-        params={"latitude": 37.5665, "longitude": 126.9780, "current": "temperature_2m,weather_code"},
-    )
-    data = res.json()["current"]
-    condition, icon = map_weather_code(data["weather_code"])
-    return {"temp": data["temperature_2m"], "condition": condition, "icon": icon}
-
+    try:
+        res = requests.get(
+            "https://api.open-meteo.com/v1/forecast",
+            params={"latitude": 37.5665, "longitude": 126.9780, "current": "temperature_2m,weather_code"},
+            timeout=10,
+        )
+        res.raise_for_status()
+        data = res.json()["current"]
+        condition, icon = map_weather_code(data["weather_code"])
+        return {"temp": data["temperature_2m"], "condition": condition, "icon": icon}
+    except Exception:
+        return {"temp": None, "condition": "정보 없음", "icon": "⚠️"}
+        
 @app.get("/hobbies")
 def get_hobbies():
     return {"hobbies": ["유튜브·영화 시청", "F1 관람", "순대국 맛집 탐방"]}
