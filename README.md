@@ -19,10 +19,14 @@
 
 | 메서드 | 경로 | 설명 |
 |---|---|---|
-| GET | `/weather` | 외부 날씨 API(Open-Meteo) 연동, 실패 시 재시도 후 안전하게 처리 |
-| GET | `/hobbies` | 취미 목록 반환 |
-| GET | `/routine` | 하루 루틴 반환 |
-| GET, POST | `/guestbook` | 방명록 등록·조회 (DB 연동 실습용) |
+| GET | `/weather` | 외부 날씨 API(Open-Meteo) 연동, 페이지 로드 시 자동 호출. 실패 시 재시도 후 안전하게 처리 |
+
+## 추가 구현 (현재 화면에서는 미사용)
+
+개발 과정에서 함께 구현했으나 최종 화면 구성에서는 제외한 엔드포인트입니다. Swagger UI에서 확인·테스트 가능합니다.
+
+- `GET /hobbies`, `GET /routine` — 취미·루틴 반환
+- `GET`, `POST /guestbook` — 방명록 등록·조회 (DB 연동 실습용)
 
 ## 프론트엔드·백엔드 연동
 
