@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>oo.</title>
+<title>Choi, EunJung</title>
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
 <style>
@@ -30,26 +30,35 @@
 
   a { color: inherit; }
 
+  /* 스크롤 등장 효과 */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
   /* 헤더 */
   nav.wrap {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding: 22px 28px;
     border-bottom: 1px solid var(--line);
   }
 
-  nav .nav-links { display: flex; gap: 28px; }
+  nav .logo-left { justify-self: start; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; text-decoration: none; }
+  nav .nav-links { justify-self: center; display: flex; gap: 28px; }
   nav .nav-links a { font-size: 0.92rem; text-decoration: none; color: var(--muted); }
   nav .nav-links a:hover { color: var(--ink); }
-  nav .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; text-decoration: none; }
+  nav .nav-right { justify-self: end; }
   nav .nav-right a { font-size: 0.92rem; text-decoration: none; color: var(--muted); display: flex; align-items: center; gap: 6px; }
 
   /* 히어로 */
   header.hero { padding: 56px 0 40px; }
 
   .wordmark {
-    font-size: clamp(3.4rem, 11vw, 7.5rem);
+    font-size: clamp(4.08rem, 13.2vw, 9rem);
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 0.92;
@@ -73,7 +82,7 @@
     padding-top: 4px;
   }
 
-  .intro-text { font-size: 1.05rem; margin: 0; max-width: 52ch; }
+  .intro-text { font-size: 1.05rem; margin: 0; max-width: 58ch; }
 
   .year-tag { font-size: 1.4rem; color: var(--muted); text-align: right; }
 
@@ -90,46 +99,6 @@
 
   .weather-chip .emoji { font-size: 1.3rem; }
 
-  /* 엣지투엣지 사진 밴드 */
-  .edge-band { display: flex; }
-
-  .ph {
-    flex: 1;
-    height: 300px;
-    background:
-      repeating-linear-gradient(45deg, #ececea 0, #ececea 2px, #f6f6f5 2px, #f6f6f5 10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-
-  /* 3계층 그리드 */
-  .layers-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 1px;
-    background: var(--line);
-    margin-top: 1px;
-  }
-
-  .layer-block {
-    background:
-      repeating-linear-gradient(45deg, #ececea 0, #ececea 2px, #f6f6f5 2px, #f6f6f5 10px);
-    min-height: 220px;
-    display: flex;
-    align-items: flex-end;
-    padding: 18px;
-  }
-
-  .layer-block span {
-    background: rgba(255,255,255,0.85);
-    padding: 4px 10px;
-    font-size: 0.88rem;
-    font-weight: 600;
-  }
-
   /* 상세 섹션 공통 */
   section.detail { padding: 64px 0 20px; }
 
@@ -140,73 +109,91 @@
     margin: 0 0 24px;
   }
 
-  .detail-list { list-style: none; padding: 0; margin: 0; }
-
-  .detail-list li {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.98rem;
-  }
-
-  .detail-list li:first-child { border-top: 1px solid var(--line); }
-  .detail-list .k { color: var(--muted); }
-
-  /* 탭 */
-  .tabs { display: flex; gap: 10px; margin: 24px 0 16px; }
-
-  .tabs button {
-    padding: 9px 20px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--bg);
-    color: var(--muted);
-    font-family: inherit;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-
-  .tabs button.active { background: var(--ink); border-color: var(--ink); color: #fff; }
-
-  .result-box {
-    background: var(--surface);
-    border-radius: 10px;
-    padding: 18px;
-    font-size: 1rem;
-    min-height: 24px;
-  }
-
-  /* Stack 섹션 */
-  section.stack { padding: 72px 0 20px; border-top: 1px solid var(--line); margin-top: 60px; }
-
-  .stack-title {
-    font-size: clamp(2.4rem, 7vw, 4.6rem);
+  /* Stack 제목 스타일을 프론트엔드/백엔드 큰 라벨로 재사용 */
+  .big-label {
+    font-size: clamp(1.68rem, 4.9vw, 3.22rem);
     font-weight: 800;
     letter-spacing: -0.02em;
+    color: #c2c2c2;
     margin: 0 0 32px;
   }
 
-  .stack-row {
-    display: flex;
-    justify-content: space-between;
+  .big-label.align-right { text-align: right; }
+
+  .prose { font-size: 1.05rem; margin: 0 0 22px; max-width: 62ch; }
+
+  .tap-link {
+    display: inline-flex;
     align-items: center;
-    padding: 20px 0;
-    border-top: 1px solid var(--line);
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--surface);
+    margin-left: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    vertical-align: middle;
   }
 
-  .stack-row:last-child { border-bottom: 1px solid var(--line); }
-
-  .stack-row .brand {
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+  /* 프론트엔드/백엔드 좌우 분할 레이아웃 */
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+    align-items: start;
   }
 
-  .stack-row .role { color: var(--muted); font-size: 0.9rem; margin-left: 10px; text-transform: none; }
-  .stack-row .status { color: var(--muted); font-size: 0.88rem; }
+  .split-section.mirror { grid-template-columns: 300px 1fr; }
+
+  .split-photo .ph {
+    width: 100%;
+    min-height: 260px;
+    height: 100%;
+    background:
+      repeating-linear-gradient(45deg, #ececea 0, #ececea 2px, #f6f6f5 2px, #f6f6f5 10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 12px;
+  }
+
+  /* 해시태그 (백엔드) */
+  .hashtags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+
+  .tag {
+    font-size: 1rem;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .tag:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* 인라인 영상 박스 */
+  .inline-video { margin-top: 20px; }
+  .inline-video .video-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .inline-video .video-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
 
   /* 방명록 */
   .db-form { display: flex; gap: 10px; margin: 24px 0 24px; flex-wrap: wrap; }
@@ -220,6 +207,9 @@
     font-family: inherit;
     font-size: 0.95rem;
   }
+
+  .db-form .gb-name { flex: 0 0 90px; min-width: 70px; }
+  .db-form .gb-content { flex: 3; min-width: 200px; }
 
   .db-form button {
     padding: 12px 22px;
@@ -238,7 +228,7 @@
   #guestbook-list .who { font-weight: 700; margin-right: 10px; }
 
   /* 연락처 카드 */
-  section.contact { padding: 72px 0 40px; }
+  section.contact { padding: 72px 0 40px; border-top: 1px solid var(--line); margin-top: 40px; }
 
   .contact-card {
     border: 1px solid var(--ink);
@@ -257,104 +247,91 @@
   .infra-line { color: var(--muted); font-size: 0.88rem; margin: 0; }
 
   @media (max-width: 720px) {
+    nav.wrap { grid-template-columns: 1fr; row-gap: 12px; justify-items: center; }
     .intro-row { grid-template-columns: 1fr; }
     .year-tag { text-align: left; }
-    .layers-grid { grid-template-columns: 1fr; }
-    .edge-band { flex-direction: column; }
+    .split-section, .split-section.mirror { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
 <nav class="wrap">
+  <div class="logo-left" aria-hidden="true"></div>
   <div class="nav-links">
-    <a href="#frontend">소개</a>
-    <a href="#backend">일상</a>
-    <a href="#db">방명록</a>
+    <a href="#frontend">프론트엔드</a>
+    <a href="#backend">백엔드</a>
+    <a href="#db">DB</a>
   </div>
-  <a class="logo" href="#top">oo.</a>
   <div class="nav-right">
     <a href="#" id="github-link-nav" target="_blank">GitHub</a>
   </div>
 </nav>
 
 <header class="hero wrap" id="top">
-  <h1 class="wordmark">oo.</h1>
+  <h1 class="wordmark reveal">Choi,<br>EunJung</h1>
 
-  <div class="intro-row">
+  <div class="intro-row reveal">
     <span class="eyebrow">Welcome</span>
-    <p class="intro-text">금융감독원에서 건전성평가를 담당하고 있습니다. 법을 해석하는 일이 많아, 법령정보시스템 API 연동 수업을 특히 기대하고 있습니다.</p>
+    <p class="intro-text">안녕하세요, DFMBA 8기 최은정입니다. 반갑습니다.<br>이번 과제의 프론트엔드, 백엔드 개념을 활용해 저를 소개해보려고 합니다.</p>
     <span class="year-tag">(2026)</span>
   </div>
 
-  <div class="weather-chip" id="weather-widget">
+  <div class="weather-chip reveal" id="weather-widget">
     <span class="emoji">☀️</span><span>불러오는 중...</span>
   </div>
 </header>
 
-<div class="edge-band">
-  <div class="ph">사진 자리 1</div>
-  <div class="ph">사진 자리 2</div>
-</div>
-
-<div class="layers-grid">
-  <div class="layer-block"><span>나의 프론트엔드</span></div>
-  <div class="layer-block"><span>나의 백엔드</span></div>
-  <div class="layer-block"><span>나의 DB</span></div>
-</div>
-
 <main class="wrap">
 
   <section class="detail" id="frontend">
-    <p class="section-label">나의 프론트엔드 · 정적 정보</p>
-    <ul class="detail-list">
-      <li><span class="k">소속 · 직무</span><span>금융감독원 · 건전성평가</span></li>
-      <li><span class="k">최근 업무</span><span>금융위원회 조치요구 관련 (링크 예정)</span></li>
-      <li><span class="k">담당 업무</span><span>제도개선 · 혁신금융 서비스 심사</span></li>
-      <li><span class="k">학업</span><span>DFMBA 8기 (2026)</span></li>
-      <li><span class="k">관심 분야</span><span>블록체인 기반 계좌 · 계정 추적 (스터디 초기 단계)</span></li>
-    </ul>
+    <h2 class="big-label reveal">나의 프론트엔드</h2>
+    <div class="split-section">
+      <div>
+        <p class="prose reveal">저는 금융감독원에서 건전성 평가 업무를 담당하고 있습니다. 건전성 평가는 금융회사들의 경영 건전성을 평가하고 필요시 조치를 요구하는 일입니다. 올해는 전자금융업권의 조치요구를 담당하고 있습니다.
+          <a class="tap-link" href="#" id="policy-link" target="_blank" title="관련 기사 링크">👆</a>
+        </p>
+        <p class="prose reveal">올해부터는 DFMBA과정을 시작해서 8기 동기분들과 여의도에서 수업을 듣고 있습니다. 인공지능 트랙과정을 위주로 수강중입니다.</p>
+        <p class="prose reveal">현재 관심있는 분야는 블록체인 기반의 계좌, 계정추적입니다. 혼자 공부하는 수준인데 관심있으신 분들은 함께 얘기해봐도 좋을 것 같습니다.</p>
+      </div>
+      <div class="split-photo reveal">
+        <div class="ph">사진 자리 · 나의 프론트엔드</div>
+      </div>
+    </div>
   </section>
 
   <section class="detail" id="backend">
-    <p class="section-label">나의 백엔드 · API 호출</p>
-    <div class="tabs">
-      <button class="active" onclick="loadDaily('hobbies', this)">취미</button>
-      <button onclick="loadDaily('routine', this)">루틴</button>
-    </div>
-    <div class="result-box" id="daily-result">불러오는 중...</div>
-  </section>
-
-  <section class="stack">
-    <h2 class="stack-title">Stack.</h2>
-    <div class="stack-row">
-      <div><span class="brand">Vercel</span><span class="role">frontend</span></div>
-      <span class="status">live</span>
-    </div>
-    <div class="stack-row">
-      <div><span class="brand">Render</span><span class="role">backend</span></div>
-      <span class="status">live</span>
-    </div>
-    <div class="stack-row">
-      <div><span class="brand">Supabase</span><span class="role">database</span></div>
-      <span class="status">connected</span>
+    <h2 class="big-label align-right reveal">나의 백엔드</h2>
+    <div class="split-section mirror">
+      <div class="split-photo reveal">
+        <div class="ph">사진 자리 · 나의 백엔드</div>
+      </div>
+      <div>
+        <p class="prose reveal">저는 평소에 Youtube나 TV 보면서 휴식합니다.</p>
+        <div class="hashtags reveal">
+          <button class="tag" data-video="OrCOflk2QmQ">#안원잘부</button>
+          <button class="tag" data-video="yN_GxazmPT8">#침착맨</button>
+          <button class="tag" data-video="uptj3to1l7o">#F1</button>
+        </div>
+        <div class="inline-video" id="inline-video"></div>
+      </div>
     </div>
   </section>
 
   <section class="detail" id="db">
-    <p class="section-label">나의 DB · 재배포해도 남습니다</p>
-    <form class="db-form" onsubmit="return postMessage(event)">
-      <input id="gb-name" placeholder="이름" required>
-      <input id="gb-content" placeholder="한마디 남기기" required>
+    <p class="section-label reveal">나의 DB</p>
+    <form class="db-form reveal" onsubmit="return postMessage(event)">
+      <input id="gb-name" class="gb-name" placeholder="이름" required>
+      <input id="gb-content" class="gb-content" placeholder="한마디 남기기" required>
       <button type="submit">등록</button>
     </form>
     <ul id="guestbook-list"></ul>
   </section>
 
   <section class="contact">
-    <div class="contact-card">
-      <div class="row"><b>GITHUB</b><a href="#" id="github-link-card" target="_blank">github.com/oo/my-intro</a></div>
-      <div class="row"><b>API</b><a href="#" id="swagger-link-card" target="_blank">oo.onrender.com/docs</a></div>
+    <div class="contact-card reveal">
+      <div class="row"><b>GITHUB</b><a href="#" id="github-link-card" target="_blank">github.com/ellaamode/my-intro</a></div>
+      <div class="row"><b>API</b><a href="#" id="swagger-link-card" target="_blank">my-intro-6i2d.onrender.com/docs</a></div>
       <div class="row"><b>LINKEDIN</b><a href="#" target="_blank">linkedin.com/in/oo</a></div>
       <div class="row"><b>MAIL</b>oo@email.com</div>
     </div>
@@ -363,13 +340,13 @@
 </main>
 
 <footer class="wrap">
-  <p class="closing-line">함께 만들어가는 중입니다.</p>
+  <p class="closing-line reveal">함께 만들어가는 중입니다.</p>
   <p class="infra-line">2026 · Vercel + Render + Supabase</p>
 </footer>
 
 <script>
   // TODO: Render 배포 후 실제 백엔드 주소로 교체
-  const API_URL =  "https://my-intro-6i2d.onrender.com";
+  const API_URL = "http://127.0.0.1:8000";
 
   async function loadWeather() {
     const box = document.getElementById('weather-widget');
@@ -379,21 +356,6 @@
       box.innerHTML = `<span class="emoji">${data.icon}</span><span>${data.temp}°C · ${data.condition}</span>`;
     } catch (e) {
       box.innerHTML = `<span class="emoji">⚠️</span><span>날씨 정보를 불러오지 못했습니다</span>`;
-    }
-  }
-
-  async function loadDaily(kind, btn) {
-    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const box = document.getElementById('daily-result');
-    box.textContent = '불러오는 중...';
-    try {
-      const res = await fetch(`${API_URL}/${kind}`);
-      const data = await res.json();
-      const value = data.hobbies || data.routine;
-      box.textContent = Array.isArray(value) ? value.join(' · ') : value;
-    } catch (e) {
-      box.textContent = '정보를 불러오지 못했습니다. 백엔드 서버 상태를 확인해주세요.';
     }
   }
 
@@ -423,13 +385,38 @@
     }
   }
 
+  // 백엔드 해시태그 → 인라인 영상 재생
+  document.querySelectorAll('.tag').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.video;
+      const box = document.getElementById('inline-video');
+      if (!id) {
+        alert('연결할 영상 링크를 아직 등록하지 않았습니다.');
+        return;
+      }
+      box.innerHTML = `<div class="video-frame"><iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+
+  // 스크롤 등장 애니메이션
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
   loadWeather();
-  loadDaily('hobbies', document.querySelector('.tabs button'));
   loadGuestbook();
 
-  // TODO: 실제 GitHub / Swagger 주소로 교체
-  document.querySelectorAll('#github-link-nav, #github-link-card').forEach(a => a.href = 'https://github.com/oo/my-intro');
-  document.getElementById('swagger-link-card').href = 'https://oo.onrender.com/docs';
+  // TODO: 실제 GitHub / Swagger / 정책 링크로 교체
+  document.querySelectorAll('#github-link-nav, #github-link-card').forEach(a => a.href = 'https://github.com/ellaamode/my-intro');
+  document.getElementById('swagger-link-card').href = 'https://my-intro-6i2d.onrender.com/docs';
+  document.getElementById('policy-link').href = '#';
 </script>
 
 </body>
