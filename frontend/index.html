@@ -270,7 +270,6 @@
   <div class="nav-links">
     <a href="#frontend">프론트엔드</a>
     <a href="#backend">백엔드</a>
-    <a href="#db">DB</a>
   </div>
   <div class="nav-right">
     <a href="#" id="github-link-nav" target="_blank">GitHub</a>
@@ -294,9 +293,9 @@
 <main class="wrap">
 
   <section class="detail" id="frontend">
-    <h2 class="big-label reveal">나의 프론트엔드</h2>
     <div class="split-section">
       <div>
+        <h2 class="big-label reveal">나의 프론트엔드</h2>
         <p class="prose reveal">저는 금융감독원에서 근무하고 있습니다. 올해는 건전성 평가 업무를 담당하고 있는데, 건전성 평가는 금융회사들의 경영 건전성을 평가하고 필요시 조치를 요구하는 일입니다.
           <a class="tap-link" href="https://www.mt.co.kr/finance/2026/07/31/2026073117124141500" id="policy-link" target="_blank" title="관련 기사 링크">📰</a>
         </p>
@@ -312,31 +311,21 @@
   </section>
 
   <section class="detail" id="backend">
-    <h2 class="big-label align-right reveal">나의 백엔드</h2>
     <div class="split-section mirror">
       <div class="split-photo reveal">
         <img class="ph" src="images/photo-backend-1.jpg" alt="이불 속에서 리모컨을 든 손">
       </div>
       <div>
+        <h2 class="big-label align-right reveal">나의 백엔드</h2>
         <p class="prose reveal">평소의 저는 TV를 보거나 Youtube를 보면서 집에서 쉬는걸 선호합니다. 요즘 좋아하는 컨텐츠는 리센느, 침착맨, 실리카겔, F1 그리고 영화 드라마는 장르를 가리지 않습니다.</p>
         <div class="hashtags reveal">
           <button class="tag" data-video="OrCOflk2QmQ">#안원잘부</button>
           <button class="tag" data-video="yN_GxazmPT8">#침착맨</button>
-          <button class="tag" data-video="uptj3to1l7o">#F1</button>
+          <button class="tag" data-video="EG_QbWsuu9U">#F1</button>
         </div>
         <div class="inline-video" id="inline-video"></div>
       </div>
     </div>
-  </section>
-
-  <section class="detail" id="db">
-    <p class="section-label reveal">나의 DB</p>
-    <form class="db-form reveal" onsubmit="return postMessage(event)">
-      <input id="gb-name" class="gb-name" placeholder="이름" required>
-      <input id="gb-content" class="gb-content" placeholder="한마디 남기기" required>
-      <button type="submit">등록</button>
-    </form>
-    <ul id="guestbook-list"></ul>
   </section>
 
   <section class="contact">
@@ -351,7 +340,7 @@
 
 <footer class="wrap">
   <p class="closing-line reveal">함께 만들어가는 중입니다.</p>
-  <p class="infra-line">2026 · Vercel + Render + Supabase</p>
+  <p class="infra-line">2026 · Vercel + Render</p>
 </footer>
 
 <script>
@@ -365,32 +354,6 @@
       box.innerHTML = `<span class="emoji">${data.icon}</span><span>${data.temp}°C · ${data.condition}</span>`;
     } catch (e) {
       box.innerHTML = `<span class="emoji">⚠️</span><span>날씨 정보를 불러오지 못했습니다</span>`;
-    }
-  }
-
-  async function postMessage(e) {
-    e.preventDefault();
-    const name = document.getElementById('gb-name').value;
-    const content = document.getElementById('gb-content').value;
-    try {
-      await fetch(`${API_URL}/guestbook?name=${encodeURIComponent(name)}&content=${encodeURIComponent(content)}`, { method: 'POST' });
-      document.getElementById('gb-name').value = '';
-      document.getElementById('gb-content').value = '';
-      loadGuestbook();
-    } catch (e) {
-      alert('등록에 실패했습니다. 백엔드 서버 상태를 확인해주세요.');
-    }
-    return false;
-  }
-
-  async function loadGuestbook() {
-    const list = document.getElementById('guestbook-list');
-    try {
-      const res = await fetch(`${API_URL}/guestbook`);
-      const data = await res.json();
-      list.innerHTML = data.map(m => `<li><span class="who">${m.name}</span>${m.content}</li>`).join('') || '<li>아직 남겨진 메시지가 없습니다.</li>';
-    } catch (e) {
-      list.innerHTML = '<li>방명록을 불러오지 못했습니다.</li>';
     }
   }
 
@@ -420,7 +383,6 @@
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   loadWeather();
-  loadGuestbook();
 
   // TODO: 실제 GitHub / Swagger / 정책 링크로 교체
   document.querySelectorAll('#github-link-nav, #github-link-card').forEach(a => a.href = 'https://github.com/ellaamode/my-intro');
