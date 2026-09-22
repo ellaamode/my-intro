@@ -2,14 +2,9 @@ import os
 import requests
 import time
 import random
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
 
-import models
-from database import engine, SessionLocal
-
-models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -22,12 +17,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 def map_weather_code(code):
     if code == 0: return "맑음", "☀️"
@@ -72,16 +61,3 @@ def get_pick():
 @app.get("/routine")
 def get_routine():
     return {"routine": ["걸으며 노래 듣기", "골프(초보)"]}
-
-@app.post("/guestbook")
-def add_message(name: str, content: str, db: Session = Depends(get_db)):
-    msg = models.Message(name=name, content=content)
-    db.add(msg)
-    db.commit()
-    db.refresh(msg)
-    return {"id": msg.id, "name": msg.name, "content": msg.content}
-
-@app.get("/guestbook")
-def list_messages(db: Session = Depends(get_db)):
-    rows = db.query(models.Message).all()
-    return [{"id": r.id, "name": r.name, "content": r.content} for r in rows]
