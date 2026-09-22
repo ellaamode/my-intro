@@ -1,6 +1,7 @@
 import os
 import requests
 import time
+import random
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -58,6 +59,15 @@ def get_weather():
 @app.get("/hobbies")
 def get_hobbies():
     return {"hobbies": ["유튜브·영화 시청", "F1 관람", "순대국 맛집 탐방"]}
+
+@app.get("/pick")
+def get_pick():
+    picks = [
+        {"label": "안원잘부", "video": "OrCOflk2QmQ"},
+        {"label": "침착맨", "video": "yN_GxazmPT8"},
+        {"label": "F1", "video": "EG_QbWsuu9U"},
+    ]
+    return random.choice(picks)
 
 @app.get("/routine")
 def get_routine():
