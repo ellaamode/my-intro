@@ -186,6 +186,23 @@
 
   .tag:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
 
+  .pick-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--ink);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  .pick-icon-btn:hover { opacity: 0.8; }
+
+  .micro-note { font-size: 0.82rem; color: #b3b3b3; margin: 8px 0 0; }
+
   /* 인라인 영상 박스 */
   .inline-video { margin-top: 20px; }
   .inline-video .video-frame {
@@ -281,13 +298,14 @@
 
   <div class="intro-row reveal">
     <span class="eyebrow">Welcome</span>
-    <p class="intro-text">안녕하세요, 저는 DFMBA 8기 최은정입니다. 반갑습니다.<br>저는 이번 과제와 연결해 개인 소개 페이지를 구성해봤습니다.</p>
+    <p class="intro-text">안녕하세요, 저는 DFMBA 8기 최은정입니다. 반갑습니다.<br>이 페이지는 클라우드컴퓨팅실습 수업의 개인 과제로 만든 저의 소개 페이지입니다. 이번 과제에서 배운 것처럼, 화면을 보여주는 프론트엔드는 Vercel에, 요청을 처리해 응답하는 백엔드는 FastAPI로 만들어 Render에 배포했습니다. 이 두 가지가 실제로 어떻게 연결되어 동작하는지 직접 구현해보면서, 그 과정 자체로 저를 소개해보고자 했습니다.</p>
     <span class="year-tag">(2026)</span>
   </div>
 
   <div class="weather-chip reveal" id="weather-widget">
     <span class="emoji">☀️</span><span>불러오는 중...</span>
   </div>
+  <p class="micro-note reveal">오늘의 날씨 정보를 불러옵니다.</p>
 </header>
 
 <main class="wrap">
@@ -296,11 +314,11 @@
     <div class="split-section">
       <div>
         <h2 class="big-label reveal">나의 프론트엔드</h2>
-        <p class="prose reveal">저는 금융감독원에서 근무하고 있습니다. 올해는 건전성 평가 업무를 담당하고 있는데, 건전성 평가는 금융회사들의 경영 건전성을 평가하고 필요시 조치를 요구하는 일입니다.
+        <p class="prose reveal">저는 금융감독원에서 근무하고 있습니다. 올해는 건전성 평가 업무를 담당하고 있는데, 건전성 평가란 은행이나 증권사 같은 금융회사들이 재무적으로 안전하게 운영되고 있는지를 살펴보고, 문제가 있을 경우 필요한 조치를 요구하는 업무입니다. 오른쪽 신문 아이콘을 누르시면 제가 담당한 조치요구와 관련된 실제 기사를 보실 수 있습니다.
           <a class="tap-link" href="https://www.mt.co.kr/finance/2026/07/31/2026073117124141500" id="policy-link" target="_blank" title="관련 기사 링크">📰</a>
         </p>
-        <p class="prose reveal">올해부터는 DFMBA과정을 시작해서 8기 동기분들과 여의도에서 수업을 듣고 있습니다. 인공지능 트랙과정을 위주로 수강중입니다.</p>
-        <p class="prose reveal">현재 관심있는 분야는 블록체인 기반의 계좌, 계정 추적입니다. 아직 혼자 자료를 수집하는 정도의 수준이지만 관심있으신 분들은 함께 얘기 나눠봐도 좋을 것 같습니다.</p>
+        <p class="prose reveal">올해부터는 KAIST DFMBA(디지털금융 MBA) 8기 과정을 시작해서, 같은 기수 동기분들과 함께 여의도에서 수업을 듣고 있습니다. 여러 트랙 중에서도 인공지능을 금융에 접목하는 트랙을 주로 수강하고 있고, 이 페이지도 그 과정에서 배운 내용을 활용해 만들었습니다.</p>
+        <p class="prose reveal">업무 외적으로 요즘 관심을 갖고 공부하는 분야는 블록체인 기반의 계좌·계정 추적입니다. 아직은 혼자 관련 자료를 찾아보는 초기 단계이지만, 같은 주제에 관심 있으신 분이 계시다면 언제든 편하게 이야기 나눠보고 싶습니다.</p>
       </div>
       <div class="split-photo gallery reveal">
         <img src="images/photo-frontend-1.jpg" alt="여의도 금융가 빌딩">
@@ -317,18 +335,22 @@
       </div>
       <div>
         <h2 class="big-label align-right reveal">나의 백엔드</h2>
-        <p class="prose reveal">평소의 저는 TV를 보거나 Youtube를 보면서 집에서 쉬는걸 선호합니다. 요즘 좋아하는 컨텐츠는 리센느, 침착맨, 실리카겔, F1 그리고 영화 드라마는 장르를 가리지 않습니다.</p>
+        <p class="prose reveal">평소 저는 집에서 TV를 보거나 Youtube 영상을 보면서 쉬는 것을 좋아합니다. 요즘 즐겨 챙겨보는 콘텐츠는 리센느, 침착맨, 실리카겔, 그리고 F1이고, 영화나 드라마는 장르를 가리지 않고 두루 즐겨봅니다. 아래 해시태그를 누르시면 실제로 즐겨보는 영상을 이 페이지 안에서 바로 재생해서 보실 수 있습니다.</p>
+        <p class="micro-note reveal">최근 재밌게 본 영상 중 하나를 무작위로 추천해드립니다!</p>
         <div class="hashtags reveal">
           <button class="tag" data-video="OrCOflk2QmQ">#안원잘부</button>
           <button class="tag" data-video="yN_GxazmPT8">#침착맨</button>
           <button class="tag" data-video="EG_QbWsuu9U">#F1</button>
+          <button class="pick-icon-btn" id="pick-btn" onclick="loadPick()" title="오늘의 추천" aria-label="오늘의 추천 받기">🎲</button>
         </div>
+        <p class="micro-note" id="pick-result"></p>
         <div class="inline-video" id="inline-video"></div>
       </div>
     </div>
   </section>
 
   <section class="contact">
+    <p class="prose reveal">여기까지 봐주셔서 감사합니다. 궁금한 점이나 함께 이야기 나누고 싶은 주제가 있으시면 아래로 편하게 연락 주세요.</p>
     <div class="contact-card reveal">
       <div class="row"><b>GITHUB</b><a href="#" id="github-link-card" target="_blank">github.com/ellaamode/my-intro</a></div>
       <div class="row"><b>API</b><a href="#" id="swagger-link-card" target="_blank">my-intro-6i2d.onrender.com/docs</a></div>
@@ -354,6 +376,20 @@
       box.innerHTML = `<span class="emoji">${data.icon}</span><span>${data.temp}°C · ${data.condition}</span>`;
     } catch (e) {
       box.innerHTML = `<span class="emoji">⚠️</span><span>날씨 정보를 불러오지 못했습니다</span>`;
+    }
+  }
+
+  async function loadPick() {
+    const result = document.getElementById('pick-result');
+    result.textContent = '고르는 중...';
+    try {
+      const res = await fetch(`${API_URL}/pick`);
+      const data = await res.json();
+      result.textContent = `오늘은 #${data.label} 어떠세요? (백엔드가 방금 무작위로 골라줬습니다)`;
+      document.getElementById('inline-video').innerHTML =
+        `<div class="video-frame"><iframe src="https://www.youtube.com/embed/${data.video}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
+    } catch (e) {
+      result.textContent = '추천을 불러오지 못했습니다. 백엔드 서버 상태를 확인해주세요.';
     }
   }
 
